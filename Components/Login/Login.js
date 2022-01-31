@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import ButtonComponent from "../ButtonComponent/ButtonComponent";
+import ButtonComponent from "../UI/ButtonComponent/ButtonComponent";
 import PasswordTextField from "../UI/PasswordTextField/PasswordTextField";
 import TextField from "../UI/TextField/TextField";
 import { styles } from "./LoginCss";
