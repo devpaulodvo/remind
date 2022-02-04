@@ -5,7 +5,7 @@ import PasswordTextField from "../UI/PasswordTextField/PasswordTextField";
 import TextField from "../UI/TextField/TextField";
 import { styles } from "./LoginCss";
 
-const Login = () => {
+const Login = ({ navigation }) => {
     return(
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -16,9 +16,9 @@ const Login = () => {
                 <TouchableOpacity onPress={null}>
                     <Text  style={styles.forgotPassword}>Forgot Password?</Text>
                 </TouchableOpacity>
-                <ButtonComponent title={"Login"} backgroundColor={"#21d1a8"}/>
+                <ButtonComponent onPress={() => navigation.navigate('MenuStack')} title={"Login"} backgroundColor={"#21d1a8"}/>
                 <Text style={styles.or}>OR</Text>
-                <ButtonComponent title={"Register"} backgroundColor={"#4b21d1"}/>
+                <ButtonComponent onPress={() => navigation.push('Register')} title={"Register"} backgroundColor={"#4b21d1"}/>
             </ScrollView>
         </View>
     )

@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const BackButton = ({style}) => {
+const BackButton = ({style, onPress}) => {
     return(
-        <TouchableOpacity style={style, styles.container}>
+        <TouchableOpacity onPress={onPress} style={[style, styles.container]}>
             <Image style={styles.image} source={require('./arrow_back_ios.png')} />
         </TouchableOpacity>
     )

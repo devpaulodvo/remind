@@ -1,11 +1,13 @@
 import React from "react";
 import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
+import BackButton from "../UI/BackButton/BackButton";
 import MenuBar from "../UI/MenuBar/MenuBar";
 
-const ToDo = () => {
+const ToDo = ({navigation}) => {
     return(
         <View style={styles.container}>
+            <BackButton onPress={()=>navigation.goBack()} style={styles.backbtn}/>
             <ScrollView style={styles.scrollcontainer}>
                 <View style={styles.itemcontainer}>
                     <Text style={styles.itemtext}>Study React Hooks{"\n"}Due: Jan 30, 2022</Text>
@@ -50,6 +52,9 @@ const styles = StyleSheet.create({
     addtodo: {
         alignSelf: "center",
         margin: 15,
+    },
+    backbtn: {
+        marginLeft:20,
     }
 })
 

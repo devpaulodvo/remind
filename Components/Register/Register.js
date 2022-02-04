@@ -7,12 +7,12 @@ import CheckBox from "../UI/CheckBox/CheckBox";
 import BackButton from "../UI/BackButton/BackButton";
 import { styles } from "./RegisterCss";
 
-const Register = () => {
+const Register = ({navigation}) => {
     return(
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.innercontainer}>
-                    <BackButton></BackButton>
+                    <BackButton onPress={()=>navigation.goBack()}></BackButton>
                     <Text style={styles.signupText}>Sign Up</Text>
                     <Text style={styles.subtext}>Pellentesque pellentesque amet porta sed ac duis sed diam.</Text>
                     <TextField label={"Full Name"} style={styles.textboxmargintop}/>

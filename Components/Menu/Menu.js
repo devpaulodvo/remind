@@ -14,12 +14,14 @@ const Item = ({ label, imgpath, onPress }) => {
     )
 }
 
-const Menu = () => {
+const Menu = ({navigation}) => {
     return(
         <View style={styles.container}>
             <ScrollView>
                 <View style={styles.menuitems}>
-                    <Item label={"To do"} imgpath={require('./icons/todo.png')}/>
+                    <Item label={"To do"} imgpath={require('./icons/todo.png')}
+                    onPress={() => navigation.push('ToDo')}
+                    />
                     <Item label={"Location"} imgpath={require('./icons/location.png')}/>
                     <Item label={"Capture"} imgpath={require('./icons/capture.png')}/>
                     <Item label={"Gallery"} imgpath={require('./icons/gallery.png')}/>
