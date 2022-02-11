@@ -29,7 +29,7 @@ const Menu = ({navigation}) => {
                     <Item label={"Google Map"} imgpath={require('./icons/googlemap.png')}/>
                 </View>
             </ScrollView>
-            <MenuBar/>
+            <MenuBar navigation={navigation}/>
         </View>
     )
 }

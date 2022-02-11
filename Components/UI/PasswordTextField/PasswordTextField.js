@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Image, TouchableOpacity, TextInput, Text } from "react-native";
 import { styles } from "./PasswordTextFieldCss";
 
-const PasswordTextField = ({onChange, style, label}) => {
+const PasswordTextField = ({onChangeText, style, label}) => {
     const [secureText, setSecureText] = useState(true);
     return(
         <React.Fragment>
@@ -10,7 +10,7 @@ const PasswordTextField = ({onChange, style, label}) => {
             <View style={styles.container}>
                 <TextInput
                 textContentType={'password'}
-                onChange={onChange}
+                onChangeText={onChangeText}
                 secureTextEntry={secureText}
                 style={styles.password}
                 />
