@@ -17,8 +17,10 @@ const Login = ({ navigation }) => {
     const handleSignIn = () => {
         auth()
         .signInWithEmailAndPassword(email, password)
-        .then(()=>{
+        .then((user)=>{
+            dispatch(setUserReducer(user.user.uid))
             navigation.navigate('MenuStack')
+            
         }
         ).catch(error=>{
             if(error.code === 'auth/invalid-password' || error.code === 'auth/invalid-email'){
@@ -52,14 +54,14 @@ const Login = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.logoText}>REMIND</Text>
                 <Text style={styles.subText}>Your Daily App</Text>
-                <TextField value={email} onChangeText={text=>setEmail(text)} label={"Email Address"} style={styles.password}/>
-                <PasswordTextField value={password} onChangeText={text=>setPassword(text)} label={"Password"} style={styles.password}/>
+                <TextField autoCapitalize='none' value={email} onChangeText={text=>setEmail(text)} label={"Email Address"} style={styles.password}/>
+                <PasswordTextField clearTextOnFocus={true} value={password} onChangeText={text=>setPassword(text)} label={"Password"} style={styles.password}/>
                 <TouchableOpacity onPress={null}>
                     <Text  style={styles.forgotPassword}>Forgot Password?</Text>
                 </TouchableOpacity>
-                <ButtonComponent onPress={handleSignIn} title={"Login"} backgroundColor={"#21d1a8"}/>
+                <ButtonComponent onPress={handleSignIn} marginTop={40} title={"Login"} backgroundColor={"#21d1a8"}/>
                 <Text style={styles.or}>OR</Text>
-                <ButtonComponent onPress={handleRegister} title={"Register"} backgroundColor={"#4b21d1"}/>
+                <ButtonComponent onPress={handleRegister} marginTop={40} title={"Register"} backgroundColor={"#4b21d1"}/>
             </ScrollView>
         </View>
     )

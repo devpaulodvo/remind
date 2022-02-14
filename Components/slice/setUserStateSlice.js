@@ -4,7 +4,7 @@ export const setUserStateSlice = createSlice({
     name: 'user',
     initialState: {
       status: true,
-      user: {},
+      user: "",
     },
     reducers: {
         setStatusReducer: (state, action) => {
@@ -18,5 +18,7 @@ export const setUserStateSlice = createSlice({
   
   // Action creators are generated for each case reducer function
   export const { setStatusReducer, setUserReducer } = setUserStateSlice.actions
+
+  export const userdetails = state => state.user.user;
   
   export default setUserStateSlice.reducer

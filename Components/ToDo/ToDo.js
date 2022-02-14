@@ -18,10 +18,10 @@ const ToDo = ({navigation}) => {
                     <Image source={require('./icons/pending.png')}/>
                 </View>
             </ScrollView>
-            <TouchableOpacity style={styles.addtodo}>
+            <TouchableOpacity onPress={()=>navigation.push("AddTodo")} style={styles.addtodo}>
                 <Image source={require('./icons/addtodo.png')}/>
             </TouchableOpacity>
-            <MenuBar/>
+            <MenuBar navigation={navigation}/>
         </View>
     )
 }
