@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { ScrollView, View, Text, TextInput } from "react-native";
+import { ScrollView, View, Text, TextInput, Alert } from "react-native";
 import BackButton from "../../UI/BackButton/BackButton";
 import TextField from "../../UI/TextField/TextField";
 import ButtonComponent from "../../UI/ButtonComponent/ButtonComponent";
@@ -36,7 +36,7 @@ const AddToDo = ({navigation}) => {
     return(
         <View style={styles.container}>
             <ScrollView style={styles.scrollcontainer}>
-            <BackButton onPress={()=>navigation.goBack()} style={styles.backbtn}/>
+            <BackButton showsVerticalScrollIndicator={false} onPress={()=>navigation.goBack()} style={styles.backbtn}/>
             <View style={styles.box}>
             <TextField 
                 value={taskTitle} 
@@ -58,7 +58,15 @@ const AddToDo = ({navigation}) => {
             <DatePicker mode="datetime" style={styles.datepicker} date={date} onDateChange={setDate} />
             </View>
             <ButtonComponent onPress={()=>{
-                addTaskHandler(date, taskDesc, taskTitle, userID)
+                addTaskHandler(date, taskDesc, taskTitle, userID);
+
+                Alert.alert(
+                    "Notice",
+                    "Task Successfully Added",
+                    [
+                      { text: "OK", onPress: () => navigation.goBack() }
+                    ]
+                  );
                 }} marginTop={50} backgroundColor={"orange"} title={"Add Task"} />
             </ScrollView>
         </View>
