@@ -6,7 +6,7 @@ import TextField from "../UI/TextField/TextField";
 import { styles } from "./LoginCss";
 import auth from '@react-native-firebase/auth';
 import { useSelector, useDispatch } from 'react-redux'
-import { setStatusReducer, setUserReducer } from '../slice/setUserStateSlice';
+import { setUserReducer } from '../slice/setUserStateSlice';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState("");

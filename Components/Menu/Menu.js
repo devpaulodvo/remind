@@ -15,6 +15,7 @@ const Item = ({ label, imgpath, onPress }) => {
 }
 
 const Menu = ({navigation}) => {
+
     return(
         <View style={styles.container}>
             <ScrollView>
@@ -26,7 +27,9 @@ const Menu = ({navigation}) => {
                     <Item label={"Capture"} imgpath={require('./icons/capture.png')}/>
                     <Item label={"Gallery"} imgpath={require('./icons/gallery.png')}/>
                     <Item label={"Chat"} imgpath={require('./icons/chat.png')}/>
-                    <Item label={"Google Map"} imgpath={require('./icons/googlemap.png')}/>
+                    <Item label={"Google Map"} imgpath={require('./icons/googlemap.png')}
+                    onPress={() => navigation.push('Maps')}
+                    />
                 </View>
             </ScrollView>
             <MenuBar navigation={navigation}/>

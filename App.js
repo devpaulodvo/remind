@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Login from './Components/Login/Login';
 import Menu from './Components/Menu/Menu';
 import Register from './Components/Register/Register';
-import Splash from './Components/Splash/Splash';
 import ToDo from './Components/ToDo/ToDo';
 import AddToDo from './Components/ToDo/AddToDo/AddToDo';
+import Maps from './Components/Maps/Maps';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
@@ -14,6 +16,8 @@ const Stack = createNativeStackNavigator();
 
 
 const LoginStack = () => {
+
+
 
   return(
   <Stack.Navigator 
@@ -33,8 +37,9 @@ const MenuStack = () => {
   screenOptions={{headerShown: false, gestureEnabled: false}}
   >
     <Stack.Screen name="Menu" component={Menu}/>
-    <Stack.Screen name="ToDo" component={ToDo}/>
-    <Stack.Screen name="AddTodo" component={AddToDo}/>
+      <Stack.Screen name="ToDo" component={ToDo}/>
+        <Stack.Screen name="AddTodo" component={AddToDo}/>
+      <Stack.Screen name="Maps" component={Maps}/>
   </Stack.Navigator>
   )
 }

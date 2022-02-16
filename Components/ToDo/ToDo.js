@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
+import { 
+    ScrollView, 
+    View, 
+    Text, 
+    Image, 
+    TouchableOpacity,
+    Alert
+} from "react-native";
 import { StyleSheet } from "react-native";
 import BackButton from "../UI/BackButton/BackButton";
 import MenuBar from "../UI/MenuBar/MenuBar";
-import { firebase } from '@react-native-firebase/database';
 import { useSelector } from "react-redux";
 import { userdetails } from "../slice/setUserStateSlice";
+import { firebase } from "@react-native-firebase/database";
 
 const ToDo = ({navigation}) => {
-    const userID = useSelector(userdetails)
-    const [tasks, setTasks] = useState({});
-    
+    const userID = useSelector(userdetails);
+    const [tasks, setTasks] = useState({}) 
+
     useEffect(()=>{
         const ac = new AbortController();
-
         firebase
         .app()
         .database('https://remind-app-57e14-default-rtdb.asia-southeast1.firebasedatabase.app/')
@@ -28,10 +34,24 @@ const ToDo = ({navigation}) => {
                 setTasks({});
             }
         })
-
         return () => ac.abort();
     }, [])
-    
+
+    const deleteTask = (id) => {
+        console.log(id)
+        Alert.alert(
+            "Options",
+            "Delete",
+            [
+              {text: "Delete", onPress: async () => {
+                await firebase.app().database('https://remind-app-57e14-default-rtdb.asia-southeast1.firebasedatabase.app/').ref('/task/'+id).remove();
+            }
+            },
+              {text: "Cancel", onPress: () => null}
+            ]
+          );
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.topOptions}>
@@ -42,9 +62,10 @@ const ToDo = ({navigation}) => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollcontainer}>
                     {
-                        Object.keys(tasks).map((id)=>{
+                        Object.keys(tasks).map((id, index)=>{
                             return(
-                            <View key={id} style={styles.itemcontainer}>
+                                
+                                <TouchableOpacity key={id} style={styles.itemcontainer}>
                                 <View style={styles.textContainer}>
                                     <Text numberOfLines={1} style={styles.itemtext}>
                                     {tasks[id].tasktitle.length < 22
@@ -60,12 +81,11 @@ const ToDo = ({navigation}) => {
                                     Due: {tasks[id].date}
                                     </Text>
                                 </View>
-                            <Image source={require('./icons/pending.png')}/>
-                            </View>
+                                <Image source={require('./icons/pending.png')}/>
+                                </TouchableOpacity>
                             )
                         })
                     }
-                    
             </ScrollView>
             
             <MenuBar navigation={navigation}/>
@@ -87,8 +107,8 @@ const styles = StyleSheet.create({
         borderColor: "#B6B5B3",
     },
     scrollcontainer: {
-        paddingHorizontal: 40,
         paddingTop: 20,
+        paddingHorizontal: 10,
     },
     textContainer: {
         flexDirection: "column",
@@ -98,10 +118,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-around",
         borderWidth: 1,
-        borderRadius: 9,
         borderColor: "#B6B5B3",
-        padding: 20,
         marginBottom: 20,
+        paddingVertical: 10,
     },
     itemtext: {
         fontSize: 18,
