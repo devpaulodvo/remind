@@ -348,7 +348,7 @@ PODS:
   - React-jsinspector (0.67.1)
   - React-logger (0.67.1):
     - glog
-  - react-native-date-picker (4.1.4):
+  - react-native-date-picker (4.2.0):
     - React-Core
   - react-native-google-maps (0.30.1):
     - Google-Maps-iOS-Utils (= 3.10.3)
@@ -356,7 +356,7 @@ PODS:
     - React-Core
   - react-native-maps (0.30.1):
     - React-Core
-  - react-native-safe-area-context (3.3.2):
+  - react-native-safe-area-context (3.4.1):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
@@ -425,20 +425,20 @@ PODS:
     - React-jsi (= 0.67.1)
     - React-logger (= 0.67.1)
     - React-perflogger (= 0.67.1)
-  - RNFBApp (14.3.2):
+  - RNFBApp (14.5.0):
     - Firebase/CoreOnly (= 8.12.1)
     - React-Core
-  - RNFBAuth (14.3.2):
+  - RNFBAuth (14.5.0):
     - Firebase/Auth (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNFBDatabase (14.3.2):
+  - RNFBDatabase (14.5.0):
     - Firebase/Database (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.2.0):
+  - RNGestureHandler (2.3.0):
     - React-Core
-  - RNScreens (3.10.2):
+  - RNScreens (3.13.0):
     - React-Core
     - React-RCTImage
   - Yoga (1.14.0)
@@ -668,10 +668,10 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 1af5de75a4c834c05d53a77c1512e5aa6c18412f
   React-jsinspector: ab80bcdb02f28cdfc0dbbaea6db1241565d59002
   React-logger: b08f354e4c928ff794ca477347fea0922aaf11c3
-  react-native-date-picker: 154239a6399403e6dd9c6922a0e8032f89319068
+  react-native-date-picker: d83ab9cccbc497642a93fdca783ae76ecd6b17b6
   react-native-google-maps: 17432eb7412df3c65d7c7c52ede085d0f5624f77
   react-native-maps: d752b0dd0e1951d815b1336332835aab6b4a836f
-  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   React-perflogger: 9a6172711d9c4c8c7ac0a426717317c3c6ecf85c
   React-RCTActionSheet: ed408b54b08278e6af8a75e08679675041da61ae
@@ -685,14 +685,14 @@ SPEC CHECKSUMS:
   React-RCTVibration: 19c012d1202df46bafbe49268a346f6b3edadfdd
   React-runtimeexecutor: 2c92a8bddd1a3e72c7513d1e74235c2d9c84875c
   ReactCommon: 2e816fad39f65f2a94a5999d5be463a6b620dcf6
-  RNFBApp: 096fb7586e167f3ba3dc7a4bf5811a19aec58735
-  RNFBAuth: 586d2548d4c5dfef663d6b0ee02b6434309b8e88
-  RNFBDatabase: 54ecb4d71f06f397a63520e1b4311858adb1182a
-  RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
-  RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
+  RNFBApp: 06c8447270d295edc431bccd55970d8711a07a42
+  RNFBAuth: e248a56b1d28d3b53b54b72a296cf9270df1d96e
+  RNFBDatabase: b3d47ea4f15e80004e84ffc5597bf409a14f9834
+  RNGestureHandler: 77d59828d40838c9fabb76a12d2d0a80c006906f
+  RNScreens: aa12070b21c1d6011b3627a0b1d09b627232b070
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 0adf4a340de3c777c3f5ed45f0e1c633db71f547
+PODFILE CHECKSUM: 1d016c2998d1d7db5d26ae2a505d92d8e8e06468
 
 COCOAPODS: 1.11.2

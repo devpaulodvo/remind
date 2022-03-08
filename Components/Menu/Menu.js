@@ -2,6 +2,8 @@ import React from "react";
 import { ScrollView, View, Image, Text, TouchableOpacity } from "react-native";
 import MenuBar from "../UI/MenuBar/MenuBar";
 import { styles } from "./MenuCss";
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserReducer } from '../slice/setUserStateSlice';
 
 const Item = ({ label, imgpath, onPress }) => {
     return(
@@ -15,7 +17,8 @@ const Item = ({ label, imgpath, onPress }) => {
 }
 
 const Menu = ({navigation}) => {
-
+    const dispatch = useDispatch()
+    
     return(
         <View style={styles.container}>
             <ScrollView>
@@ -28,7 +31,9 @@ const Menu = ({navigation}) => {
                     <Item label={"Gallery"} imgpath={require('./icons/gallery.png')}/>
                     <Item label={"Chat"} imgpath={require('./icons/chat.png')}/>
                     <Item label={"Google Map"} imgpath={require('./icons/googlemap.png')}
-                    onPress={() => navigation.push('Maps')}
+                    onPress={() => {
+                        navigation.push('Maps')
+                    }}
                     />
                 </View>
             </ScrollView>

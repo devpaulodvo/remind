@@ -18,8 +18,11 @@ const ToDo = ({navigation}) => {
     const userID = useSelector(userdetails);
     const [tasks, setTasks] = useState({}) 
 
+    
+
     useEffect(()=>{
         const ac = new AbortController();
+        
         firebase
         .app()
         .database('https://remind-app-57e14-default-rtdb.asia-southeast1.firebasedatabase.app/')
@@ -27,13 +30,14 @@ const ToDo = ({navigation}) => {
         .child("task")
         .orderByChild("uid")
         .equalTo(userID)
-        .on("value", snapshot => {
+        .on("value", async snapshot => {
             if(snapshot.val() !== null){
                 setTasks({...snapshot.val()})
             }else{
                 setTasks({});
             }
         })
+
         return () => ac.abort();
     }, [])
 
@@ -64,8 +68,7 @@ const ToDo = ({navigation}) => {
                     {
                         Object.keys(tasks).map((id, index)=>{
                             return(
-                                
-                                <TouchableOpacity key={id} style={styles.itemcontainer}>
+                                <TouchableOpacity key={index} style={styles.itemcontainer}>
                                 <View style={styles.textContainer}>
                                     <Text numberOfLines={1} style={styles.itemtext}>
                                     {tasks[id].tasktitle.length < 22

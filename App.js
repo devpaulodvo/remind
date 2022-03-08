@@ -5,8 +5,9 @@ import Register from './Components/Register/Register';
 import ToDo from './Components/ToDo/ToDo';
 import AddToDo from './Components/ToDo/AddToDo/AddToDo';
 import Maps from './Components/Maps/Maps';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserReducer } from './Components/slice/setUserStateSlice';
 
 
 import auth from '@react-native-firebase/auth';
@@ -44,13 +45,19 @@ const MenuStack = () => {
   )
 }
 
-const App = () => {
+const App = ({navigation}) => {
+  // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  const [userz, setUser] = useState();
   const [initialRoute, setInitialRoute] = useState('LoginStack')
-
+  const dispatch = useDispatch()
+  // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
+    if(user){
+      dispatch(setUserReducer(user.uid))
+      setInitialRoute("MenuStack")
+    }
     if (initializing) setInitializing(false);
   }
 
@@ -62,20 +69,16 @@ const App = () => {
   if (initializing) return null;
 
   return (
-    <NavigationContainer>
-    {/* // <Splash/>
-    // <Login></Login>
-    // <Register/>
-    // <Menu></Menu> */}
-    <Stack.Navigator 
-    initialRouteName="LoginStack" 
-    screenOptions={{
-    headerShown: false, gestureEnabled: false}}
-    >
-      <Stack.Screen name="LoginStack" component={LoginStack}/>
-      <Stack.Screen name="MenuStack" component={MenuStack} />
-    </Stack.Navigator>
-    </NavigationContainer>
+    <React.Fragment>
+      <Stack.Navigator 
+      initialRouteName={initialRoute} 
+      screenOptions={{
+      headerShown: false, gestureEnabled: false}}
+      >
+        <Stack.Screen name="LoginStack" component={LoginStack}/>
+        <Stack.Screen name="MenuStack" component={MenuStack} />
+      </Stack.Navigator>
+    </React.Fragment>
   )
 }
 

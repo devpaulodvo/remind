@@ -5,9 +5,9 @@ import auth from '@react-native-firebase/auth';
 
 const MenuBar = ({navigation}) => {
 
-    const signOut = () => {
-        auth().signOut();
-        navigation.navigate('LoginStack');
+    const signOut = async () => {
+        await navigation.navigate('LoginStack');
+        await auth().signOut();
     }
 
     return(
