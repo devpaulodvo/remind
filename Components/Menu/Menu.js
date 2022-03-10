@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, View, Image, Text, TouchableOpacity } from "react-native";
+import Geolocation from 'react-native-geolocation-service';
 import MenuBar from "../UI/MenuBar/MenuBar";
 import { styles } from "./MenuCss";
 import { useSelector, useDispatch } from 'react-redux'
 import { setUserReducer } from '../slice/setUserStateSlice';
+import { setOriginReducer, setDestReducer, coordsD, coordsO } from '../slice/setOriginDest'
 
 const Item = ({ label, imgpath, onPress }) => {
     return(
@@ -18,7 +20,22 @@ const Item = ({ label, imgpath, onPress }) => {
 
 const Menu = ({navigation}) => {
     const dispatch = useDispatch()
-    
+    const dest = useSelector(coordsD)
+    const or = useSelector(coordsO)
+
+    Geolocation.getCurrentPosition(
+        (position) => {
+            dispatch(setOriginReducer({latitude:position.coords.latitude, longitude:position.coords.longitude}));
+            if(dest === null){
+                dispatch(setDestReducer({latitude:position.coords.latitude, longitude:position.coords.longitude}));
+            }
+        },
+        (error) => {
+            console.log(error.code, error.message);
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+
     return(
         <View style={styles.container}>
             <ScrollView>

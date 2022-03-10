@@ -18,8 +18,6 @@ const ToDo = ({navigation}) => {
     const userID = useSelector(userdetails);
     const [tasks, setTasks] = useState({}) 
 
-    
-
     useEffect(()=>{
         const ac = new AbortController();
         

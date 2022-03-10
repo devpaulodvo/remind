@@ -1,31 +1,40 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { API_GOOGLE_MAPS_KEY } from '@env';
-import { 
-    View,
-    Text,
-    StyleSheet,
-    Dimensions,
-    Image,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image,} from "react-native";
+import Geolocation from 'react-native-geolocation-service';
 import BackButton from "../UI/BackButton/BackButton";
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
+import { useSelector, useDispatch } from 'react-redux'
+import { setOriginReducer, setDestReducer, coordsO, coordsD } from '../slice/setOriginDest'
 
 const Maps = ({navigation}) => {
+    const dispatch = useDispatch();
     const GOOGLE_MAPS_APIKEY = API_GOOGLE_MAPS_KEY;
     const [distance, setDistance] = useState(0);
     const mapView = useRef(null)
     const { width, height } = Dimensions.get('window');
     const [locationString, setLocationString] = useState("");
-    const [coordsOrigin, setCoordsOrigin] = useState(
-        {latitude: 37.3318456, longitude: -122.0296002}
-    )
-    const [coordsDest, setCoordsDest] = useState(
-        {latitude: 37.3318456, longitude: -122.0296002},
-    )
+    
+    const coordsOrigin = useSelector(coordsO)
+    const coordsDest = useSelector(coordsD)
+
+    Geolocation.watchPosition(
+        (position) => {
+            console.log(position)
+            dispatch(setOriginReducer({latitude:position.coords.latitude, longitude:position.coords.longitude}));
+        },
+        (error) => {
+            console.log(error.code, error.message);
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+
+    useEffect(()=>{
+        //use Geolocation to constantly update your location??
+    },[])
     
     return(
-        
         <View style={styles.container}>
             <MapView
                 ref={mapView}
@@ -38,17 +47,19 @@ const Maps = ({navigation}) => {
                 longitudeDelta: 0.1321,
                 }}
                 onPoiClick={(e)=>{
-                    console.log(e.nativeEvent)
-                    setCoordsDest(e.nativeEvent.coordinate)
+                    dispatch(setDestReducer({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude}))
                     setLocationString(e.nativeEvent.name)
                 }}
                 onPress={(e) => {
-                    setCoordsDest({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})
+                    dispatch(setDestReducer({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude}))
+                    console.log(coordsDest)
                     setLocationString(e.nativeEvent.name)
                 }}
             >
                 <Marker coordinate={coordsOrigin} 
-                onDragEnd={(e) => setCoordsOrigin({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
+                onDragEnd={
+                    (e) => dispatch(setOriginReducer({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude}))
+                }
                 >
                     <Image
                         source={require('./parking.png')}
@@ -58,7 +69,9 @@ const Maps = ({navigation}) => {
                 </Marker>
 
                 {distance !== 0 ? <Marker coordinate={coordsDest} 
-                onDragEnd={(e) => setCoordsDest({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
+                onDragEnd={
+                    (e) => dispatch(setDestReducer({latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude}))
+                }
                 draggable/>
                 :
                 <></>
@@ -71,8 +84,6 @@ const Maps = ({navigation}) => {
                 strokeWidth={5}
                 strokeColor="hotpink"
                 onReady={result => {
-                    console.log(`Distance: ${result.distance} km`)
-                    console.log(`Duration: ${result.duration} min.`)
                     setDistance(result.distance)
                     if(result.distance !== 0){
                         mapView.current.fitToCoordinates(result.coordinates, {
@@ -96,7 +107,6 @@ const Maps = ({navigation}) => {
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     mapStyle: {
